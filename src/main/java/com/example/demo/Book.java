@@ -6,9 +6,16 @@ import java.util.Set;
 
 @Entity
 public class Book {
+
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
     private long bookId;
     private String title;
 
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(name = "book_author",
+            joinColumns = { @JoinColumn(name = "bookId") },
+            inverseJoinColumns = { @JoinColumn(name = "authorId") })
     private Set<Author> authors = new HashSet<Author>(0);
 
     public Book() {
@@ -37,9 +44,7 @@ public class Book {
     }
 
 
-    @ManyToMany(cascade = CascadeType.MERGE)
-    @JoinTable(name = "book_author", joinColumns = { @JoinColumn(name = "bookId") },
-            inverseJoinColumns = { @JoinColumn(name = "authorId") })
+
     public Set<Author> getAuthors() {
 //        return authors;
         return this.authors;

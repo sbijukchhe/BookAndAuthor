@@ -19,11 +19,19 @@
                 <tr>
                     <th>Book Title</th>
                     <th>Book ID</th>
+                    <th>Author First Name</th>
+                    <th>Author Last Name</th>
+
                 </tr>
                 <tr th:each="book : ${books}">
                     <td th:text="${book.title}"></td>
                     <td th:text="${book.bookId}"></td>
-                    <td th:text="${book.author.firstName}"></td>
+
+                    <div> th:each="author : ${book.authors}">
+                        <td th:text="${author.firstName}"></td>
+                        <td th:text="${author.lastName}"></td>
+                    </div>
+
                     <td>
                         <a th:href="@{update/{id}(id=${book.bookId})}">Update</a>
                         <a th:href="@{detail/{id}(id=${book.bookId})}">Details</a>
@@ -43,11 +51,11 @@
                 <tr th:each="author : ${authors}">
                     <td th:text="${author.firstName}"></td>
                     <td th:text="${author.lastName}"></td>
-
+                    <td th:text="${author.email}"></td>
                     <td>
-                        <a th:href="@{update_employee/{id}(id=${employee.employeeID})}">Update</a>
-                        <a th:href="@{detail_employee/{id}(id=${employee.employeeID})}">Details</a>
-                        <a th:href="@{delete_employee/{id}(id=${employee.employeeID})}">Delete</a>
+                        <a th:href="@{update_employee/{id}(id=${author.authorId})}">Update</a>
+                        <a th:href="@{detail_employee/{id}(id=${author.authorId})}">Details</a>
+                        <a th:href="@{delete_employee/{id}(id=${author.authorId})}">Delete</a>
                     </td>
                 </tr>
             </table>

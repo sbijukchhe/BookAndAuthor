@@ -59,7 +59,8 @@ public class Author {
         this.email = email;
     }
 
-    @ManyToMany(mappedBy = "authors")
+    @ManyToMany(mappedBy = "authors", cascade = CascadeType.ALL)
+//    @ManyToMany(mappedBy = "authors")
     private Set<Book> books;
 
     public Set<Book> getBooks() {
